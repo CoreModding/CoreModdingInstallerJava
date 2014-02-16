@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
 public class CoreModdingInstallerFrame extends JFrame {
+	
 	private static final long serialVersionUID = 1L;
 	
 	public static JFrame frmCoreModdingInstaller = new JFrame();
@@ -37,17 +38,13 @@ public class CoreModdingInstallerFrame extends JFrame {
 	private JLabel statusLabel = new JLabel(status);
 	
 	public CoreModdingInstallerFrame() {
-	
-		// Required Frame/Panel stuff
+
 	    checkedListBox1.setPreferredSize(new Dimension(234, 184));
 	    checkedListBox1.setSize(0, 1000);
 	    install.setPreferredSize(new Dimension(234, 21));
-	    
 	    pnlCoreModdingInstaller.add(checkedListBox1);
 	    pnlCoreModdingInstaller.add(install, BorderLayout.CENTER);
 	    pnlCoreModdingInstaller.add(statusLabel);
-	
-	    
 	    frmCoreModdingInstaller.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frmCoreModdingInstaller.getContentPane().add(pnlCoreModdingInstaller, BorderLayout.CENTER);
 	    frmCoreModdingInstaller.setTitle("CORE Modding Installer");
@@ -55,19 +52,11 @@ public class CoreModdingInstallerFrame extends JFrame {
 	    frmCoreModdingInstaller.setLocationRelativeTo(null);
 	    frmCoreModdingInstaller.setResizable(false);
 	    frmCoreModdingInstaller.setVisible(true);
-	    
-		// Setting the status message
 	    this.status = "Downloading data...";
 	    statusLabel.setText(status);
-	    
-	    // Retrieving the data
 	    try { in = new Scanner(new URL(url).openStream()); } catch(Exception e) { }
 	    if(in != null) while(in.hasNextLine()) { data += in.nextLine() + "\n" + ","; }
-	    
-	    //Array for holding the checkboxes
 	    if(!data.equals("")) { boxes = new JCheckBox[data.split(",").length]; }
-	    
-	    // Adding the data
 	    if(data != null) {
 	        for(int i = 0; i < data.split(",").length; i+=3) {
 	        	JCheckBox cb = new JCheckBox(data.split(",")[i].trim() + " - " + data.split(",")[i + 1] + new String(new char[100]).replace("\0", " ")); // Horrible yet the only way to make it wrap properly (that I know of)
@@ -75,66 +64,50 @@ public class CoreModdingInstallerFrame extends JFrame {
 	            checkBoxes.add(cb);
 	        }
 	    } else { checkBoxes.add(new JLabel("No mod data available")); install.setEnabled(false); status = "ERROR"; statusLabel.setText(status); }
-	    
-	    // Adding action for the Install/Update button
 	    install.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// Setting the status message
 		        status = "Installing Mods...";
 		        statusLabel.setText(status);
-		        
-		        // Get the users OS
 		        String os = System.getProperty("os.name");
-		        
-		        // Set the correct directory for user's OS
 		        String location = null;
 		        if(os.toLowerCase().startsWith("windows")) location = System.getenv("USERPROFILE") + "/appdata/roaming/.minecraft/mods/";
 		        if(os.toLowerCase().startsWith("mac")) location = System.getProperty("user.home") + "/Library/Application Support/minecraft/mods/";
-		        
-		        // Double-checking directory/OS
 		        if(location == null) try { throw new Exception("OS not recognized!"); } catch(Exception e) { }
-		        
-		        // Adding/Replacing mods
 		        for (int i = 0; i < boxes.length; i+=3) {
 		        	if(boxes[0].isSelected()) {
 		        		downloadFile(data.split(",")[i + 2], location + data.split(",")[i].trim() + data.split(",")[i + 1].trim() + data.split(",")[i + 2].substring(data.split(",")[2].length() - 5).trim());
 		        	}
 		        	
 		        }
-		        
-		        // Setting the status message
-		        status = "      All done!      ";
+		        status = "      Complete!      ";
 		        statusLabel.setText(status);
 			}
 	    });
-	    
-	    // Setting the status message
 	    this.status = "Waiting for input...";
 	    statusLabel.setText(status);
 	}
 	
 	public static void downloadFile(String URL, String location) {
 		URL url;
-        URLConnection con;
-        DataInputStream dis; 
-        FileOutputStream fos; 
-        byte[] fileData;  
-        try {
-            url = new URL(URL);
-            con = url.openConnection();
-            dis = new DataInputStream(con.getInputStream());
-            fileData = new byte[con.getContentLength()]; 
-            for (int q = 0; q < fileData.length; q++) { 
-                fileData[q] = dis.readByte();
-            }
-            dis.close();
-            fos = new FileOutputStream(new File(location));
-            fos.write(fileData);
-            fos.close();
-        }
-        catch(Exception m) {
-            System.out.println(m);
-        }
+        	URLConnection con;
+        	DataInputStream dis; 
+        	FileOutputStream fos; 
+        	byte[] fileData;  
+        	try {
+	            	url = new URL(URL);
+	            	con = url.openConnection();
+            		dis = new DataInputStream(con.getInputStream());
+            		fileData = new byte[con.getContentLength()]; 
+            		for (int q = 0; q < fileData.length; q++) { 
+                		fileData[q] = dis.readByte();
+            	}
+            	dis.close();
+            	fos = new FileOutputStream(new File(location));
+            	fos.write(fileData);
+            	fos.close();
+	        }
+        	catch(Exception m) {
+            	System.out.println(m);
+        	}
 	}
-	
 }
