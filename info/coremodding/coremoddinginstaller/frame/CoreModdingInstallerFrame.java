@@ -65,6 +65,7 @@ public class CoreModdingInstallerFrame extends JFrame {
 	        }
 	    } else { checkBoxes.add(new JLabel("No mod data available")); install.setEnabled(false); status = "ERROR"; statusLabel.setText(status); }
 	    install.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 		        status = "Installing Mods...";
 		        statusLabel.setText(status);
