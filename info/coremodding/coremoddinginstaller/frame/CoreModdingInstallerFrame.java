@@ -36,29 +36,27 @@ public class CoreModdingInstallerFrame extends JFrame {
 
     JCheckBox[] boxes;
 
-    private JPanel checkBoxes = new JPanel(new WrapLayout(FlowLayout.LEFT));
-    private JScrollPane checkedListBox1 = new JScrollPane(this.checkBoxes,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     String data = "";
 
     private Scanner in;
-    private JButton install = new JButton("Install/Update selected mods");
     String status;
     JLabel statusLabel = new JLabel(this.status);
-
-    private String url = "https://raw.github.com/CoreModding/CoreModdingInstaller/master/data";
 
     /**
      * The mainc onstructor
      */
     public CoreModdingInstallerFrame() {
-
-        this.checkedListBox1.setPreferredSize(new Dimension(234, 184));
-        this.checkedListBox1.setSize(0, 1000);
-        this.install.setPreferredSize(new Dimension(234, 21));
-        pnlCoreModdingInstaller.add(this.checkedListBox1);
-        pnlCoreModdingInstaller.add(this.install, BorderLayout.CENTER);
+        JPanel checkBoxes = new JPanel(new WrapLayout(FlowLayout.LEFT));
+        JScrollPane checkedListBox1 = new JScrollPane(checkBoxes,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        JButton install = new JButton("Install/Update selected mods");
+        String url = "https://raw.github.com/CoreModding/CoreModdingInstaller/master/data";
+        checkedListBox1.setPreferredSize(new Dimension(234, 184));
+        checkedListBox1.setSize(0, 1000);
+        install.setPreferredSize(new Dimension(234, 21));
+        pnlCoreModdingInstaller.add(checkedListBox1);
+        pnlCoreModdingInstaller.add(install, BorderLayout.CENTER);
         pnlCoreModdingInstaller.add(this.statusLabel);
         frmCoreModdingInstaller.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmCoreModdingInstaller.getContentPane().add(pnlCoreModdingInstaller,
@@ -71,8 +69,9 @@ public class CoreModdingInstallerFrame extends JFrame {
         this.status = "Downloading data...";
         this.statusLabel.setText(this.status);
         try {
-            this.in = new Scanner(new URL(this.url).openStream());
+            this.in = new Scanner(new URL(url).openStream());
         } catch (Exception e) {
+            e.printStackTrace();
         }
         if (this.in != null)
             while (this.in.hasNextLine()) {
@@ -86,29 +85,16 @@ public class CoreModdingInstallerFrame extends JFrame {
                 JCheckBox cb = new JCheckBox(this.data.split(",")[i].trim()
                         + " - " + this.data.split(",")[i + 1]
                         + new String(new char[100]).replace("\0", " ")); // Horrible
-                // yet
-                // the
-                // only
-                // way
-                // to
-                // make
-                // it
-                // wrap
-                // properly
-                // (that
-                // I
-                // know
-                // of)
                 this.boxes[i] = cb;
-                this.checkBoxes.add(cb);
+                checkBoxes.add(cb);
             }
         } else {
-            this.checkBoxes.add(new JLabel("No mod data available"));
-            this.install.setEnabled(false);
+            checkBoxes.add(new JLabel("No mod data available"));
+            install.setEnabled(false);
             this.status = "ERROR";
             this.statusLabel.setText(this.status);
         }
-        this.install.addActionListener(new ActionListener() {
+        install.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 CoreModdingInstallerFrame.this.status = "Installing Mods...";
@@ -126,6 +112,7 @@ public class CoreModdingInstallerFrame extends JFrame {
                     try {
                         throw new Exception("OS not recognized!");
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 for (int i = 0; i < CoreModdingInstallerFrame.this.boxes.length; i += 3) {
                     if (CoreModdingInstallerFrame.this.boxes[0].isSelected()) {
