@@ -16,17 +16,17 @@ import static org.apache.commons.io.FileUtils.copyURLToFile;
 public class CoreModdingInstallerFrame extends JFrame {
 
     @SuppressWarnings("javadoc")
-    public static final JFrame frmCoreModdingInstaller = new JFrame();
+    private static final JFrame frmCoreModdingInstaller = new JFrame();
 
     @SuppressWarnings("javadoc")
-    public static final JPanel pnlCoreModdingInstaller = new JPanel();
+    private static final JPanel pnlCoreModdingInstaller = new JPanel();
     private static final long serialVersionUID = 1L;
 
     /**
      * @param url      The url to download
      * @param location Where to download the file to
      */
-    public static void downloadFile(String url, String location) {
+    private static void downloadFile(String url, String location) {
         try {
             copyURLToFile(new URL(url), new File(location));
         } catch (Exception e) {
@@ -34,19 +34,19 @@ public class CoreModdingInstallerFrame extends JFrame {
         }
     }
 
-    JCheckBox[] boxes;
+    private JCheckBox[] boxes;
 
-    String data = "";
+    private String data = "";
 
     private Scanner in;
-    String status;
-    JLabel statusLabel = new JLabel(this.status);
+    private String status;
+    private final JLabel statusLabel = new JLabel(this.status);
 
     /**
      * The mainc onstructor
      */
     public CoreModdingInstallerFrame() {
-        JPanel checkBoxes = new JPanel(new WrapLayout(FlowLayout.LEFT));
+        JPanel checkBoxes = new JPanel(new WrapLayout());
         JScrollPane checkedListBox1 = new JScrollPane(checkBoxes,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

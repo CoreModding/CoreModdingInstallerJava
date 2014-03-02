@@ -23,11 +23,9 @@ public class WrapLayout extends FlowLayout {
      * a default 5-unit horizontal and vertical gap. The value of the alignment
      * argument must be one of <code>WrapLayout</code>, <code>WrapLayout</code>,
      * or <code>WrapLayout</code>.
-     *
-     * @param align the alignment value
      */
-    public WrapLayout(int align) {
-        super(align);
+    public WrapLayout() {
+        super(FlowLayout.LEFT);
     }
 
     /**
