@@ -16,10 +16,10 @@ import static org.apache.commons.io.FileUtils.copyURLToFile;
 public class CoreModdingInstallerFrame extends JFrame {
 
     @SuppressWarnings("javadoc")
-    public static JFrame frmCoreModdingInstaller = new JFrame();
+    public static final JFrame frmCoreModdingInstaller = new JFrame();
 
     @SuppressWarnings("javadoc")
-    public static JPanel pnlCoreModdingInstaller = new JPanel();
+    public static final JPanel pnlCoreModdingInstaller = new JPanel();
     private static final long serialVersionUID = 1L;
 
     /**
