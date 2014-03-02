@@ -33,7 +33,7 @@ public class WrapLayout extends FlowLayout {
     /**
      * Creates a new flow layout manager with the indicated alignment and the
      * indicated horizontal and vertical gaps.
-     * <p/>
+     * <p>
      * The value of the alignment argument must be one of
      * <code>WrapLayout</code>, <code>WrapLayout</code>, or
      * <code>WrapLayout</code>.
