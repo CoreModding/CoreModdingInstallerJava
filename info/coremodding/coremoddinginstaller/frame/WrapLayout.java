@@ -1,7 +1,13 @@
 package info.coremodding.coremoddinginstaller.frame;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Insets;
+
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 
 /**
  * FlowLayout subclass that fully supports wrapping of components.
@@ -10,14 +16,6 @@ public class WrapLayout extends FlowLayout
 {
     
     private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructs a new <code>WrapLayout</code> with a left alignment and a
-     * default 5-unit horizontal and vertical gap.
-     */
-    // public WrapLayout() {
-    // super();
-    // }
     
     /**
      * Constructs a new <code>FlowLayout</code> with the specified alignment and
@@ -50,12 +48,16 @@ public class WrapLayout extends FlowLayout
         super(align, hgap, vgap);
     }
     
-    /*
+    /**
      * A new row has been completed. Use the dimensions of this row to update
      * the preferred size for the container.
-     * @param dim update the width and height when appropriate
-     * @param rowWidth the width of the row to add
-     * @param rowHeight the height of the row to add
+     * 
+     * @param dim
+     *            update the width and height when appropriate
+     * @param rowWidth
+     *            the width of the row to add
+     * @param rowHeight
+     *            the height of the row to add
      */
     private void addRow(Dimension dim, int rowWidth, int rowHeight)
     {

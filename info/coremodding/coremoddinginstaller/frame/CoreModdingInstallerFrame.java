@@ -1,14 +1,22 @@
 package info.coremodding.coremoddinginstaller.frame;
 
-import javax.swing.*;
-import java.awt.*;
+import static org.apache.commons.io.FileUtils.copyURLToFile;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URL;
 import java.util.Scanner;
 
-import static org.apache.commons.io.FileUtils.copyURLToFile;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * The JFrame for the installer
@@ -17,7 +25,6 @@ public class CoreModdingInstallerFrame extends JFrame
 {
     
     private static final JFrame frmCoreModdingInstaller = new JFrame();
-    
     private static final JPanel pnlCoreModdingInstaller = new JPanel();
     private static final long   serialVersionUID        = 1L;
     
@@ -39,15 +46,13 @@ public class CoreModdingInstallerFrame extends JFrame
     }
     
     JCheckBox[]     boxes;
-    
     String          data        = "";
-    
     private Scanner in;
     String          status;
     final JLabel    statusLabel = new JLabel(this.status);
     
     /**
-     * The mainc onstructor
+     * The main constructor
      */
     public CoreModdingInstallerFrame()
     {
@@ -147,7 +152,6 @@ public class CoreModdingInstallerFrame extends JFrame
                                                                 .length() - 5)
                                                 .trim());
                     }
-                    
                 }
                 CoreModdingInstallerFrame.this.status = "      Complete!      ";
                 CoreModdingInstallerFrame.this.statusLabel
