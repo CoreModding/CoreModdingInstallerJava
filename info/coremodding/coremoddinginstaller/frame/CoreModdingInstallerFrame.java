@@ -15,10 +15,8 @@ import static org.apache.commons.io.FileUtils.copyURLToFile;
  */
 public class CoreModdingInstallerFrame extends JFrame {
 
-    @SuppressWarnings("javadoc")
     private static final JFrame frmCoreModdingInstaller = new JFrame();
 
-    @SuppressWarnings("javadoc")
     private static final JPanel pnlCoreModdingInstaller = new JPanel();
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +24,7 @@ public class CoreModdingInstallerFrame extends JFrame {
      * @param url      The url to download
      * @param location Where to download the file to
      */
-    private static void downloadFile(String url, String location) {
+    static void downloadFile(String url, String location) {
         try {
             copyURLToFile(new URL(url), new File(location));
         } catch (Exception e) {
@@ -34,13 +32,13 @@ public class CoreModdingInstallerFrame extends JFrame {
         }
     }
 
-    private JCheckBox[] boxes;
+    JCheckBox[] boxes;
 
-    private String data = "";
+    String data = "";
 
     private Scanner in;
-    private String status;
-    private final JLabel statusLabel = new JLabel(this.status);
+    String status;
+    final JLabel statusLabel = new JLabel(this.status);
 
     /**
      * The mainc onstructor

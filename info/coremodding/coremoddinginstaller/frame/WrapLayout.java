@@ -14,9 +14,9 @@ public class WrapLayout extends FlowLayout {
      * Constructs a new <code>WrapLayout</code> with a left alignment and a
      * default 5-unit horizontal and vertical gap.
      */
-    public WrapLayout() {
-        super();
-    }
+    //public WrapLayout() {
+    //    super();
+    //}
 
     /**
      * Constructs a new <code>FlowLayout</code> with the specified alignment and
