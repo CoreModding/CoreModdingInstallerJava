@@ -61,7 +61,7 @@ public class CoreModdingInstallerFrame extends JFrame
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         JButton install = new JButton("Install/Update selected mods");
-        String url = "https://raw.github.com/CoreModding/CoreModdingInstaller/master/data";
+        String url = "https://raw.github.com/CoreModding/CoreModdingInstallerJava/master/data";
         checkedListBox1.setPreferredSize(new Dimension(234, 184));
         checkedListBox1.setSize(0, 1000);
         install.setPreferredSize(new Dimension(234, 21));
@@ -93,7 +93,7 @@ public class CoreModdingInstallerFrame extends JFrame
         {
             this.boxes = new JCheckBox[this.data.split(",").length];
         }
-        if (this.data != null)
+        if (this.data != null && !this.data.equals(""))
         {
             for (int i = 0; i < this.data.split(",").length; i += 3)
             {
