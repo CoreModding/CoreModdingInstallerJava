@@ -61,10 +61,10 @@ public class CoreModdingInstallerFrame extends JFrame
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         JButton install = new JButton("Install/Update selected mods");
-        String url = "https://raw.github.com/CoreModding/CoreModdingInstallerJava/master/data";
-        checkedListBox1.setPreferredSize(new Dimension(234, 184));
+        String url = "https://github.com/CoreModding/CoreModdingInstallerJava/raw/master/data";
+        checkedListBox1.setPreferredSize(new Dimension(500, 500));
         checkedListBox1.setSize(0, 1000);
-        install.setPreferredSize(new Dimension(234, 21));
+        install.setPreferredSize(new Dimension(200, 500));
         pnlCoreModdingInstaller.add(checkedListBox1);
         pnlCoreModdingInstaller.add(install, BorderLayout.CENTER);
         pnlCoreModdingInstaller.add(this.statusLabel);
@@ -72,7 +72,7 @@ public class CoreModdingInstallerFrame extends JFrame
         frmCoreModdingInstaller.getContentPane().add(pnlCoreModdingInstaller,
                 BorderLayout.CENTER);
         frmCoreModdingInstaller.setTitle("CORE Modding Installer");
-        frmCoreModdingInstaller.setSize(new Dimension(258, 275));
+        frmCoreModdingInstaller.setSize(new Dimension(725, 525));
         frmCoreModdingInstaller.setLocationRelativeTo(null);
         frmCoreModdingInstaller.setResizable(false);
         frmCoreModdingInstaller.setVisible(true);
@@ -123,9 +123,13 @@ public class CoreModdingInstallerFrame extends JFrame
                 if (os.toLowerCase().startsWith("windows")) location = System
                         .getenv("USERPROFILE")
                         + "/appdata/roaming/.minecraft/mods/";
-                if (os.toLowerCase().startsWith("mac")) location = System
+                else if (os.toLowerCase().startsWith("mac")) location = System
                         .getProperty("user.home")
                         + "/Library/Application Support/minecraft/mods/";
+                else if ((System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0 || System.getProperty("os.name").toLowerCase().indexOf("nux") >= 0 || System.getProperty("os.name").toLowerCase()
+                        .indexOf("aix") > 0)) location = System
+                        .getProperty("user.home")
+                        + "/.minecraft/mods/";
                 if (location == null) try
                 {
                     throw new Exception("OS not recognized!");

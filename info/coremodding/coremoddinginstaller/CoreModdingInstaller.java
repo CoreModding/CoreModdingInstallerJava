@@ -21,6 +21,6 @@ public class CoreModdingInstaller
                 "CORE Modding Installer");
         System.setProperty(
                 "com.apple.mrj.application.apple.menu.about.version", "v1.0");
-        new CoreModdingInstallerFrame();
+        new CoreModdingInstallerFrame().getBackground();
     }
 }
